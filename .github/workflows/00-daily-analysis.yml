@@ -1,7 +1,6 @@
 name: 每日股票分析
 
 on:
-  
   # 手动触发
   workflow_dispatch:
     inputs:
@@ -20,16 +19,16 @@ on:
         default: false
         type: boolean
 
-# 并发控制：同一时间只运行一个分析任务
-concurrency:
-  group: stock-analysis
-  cancel-in-progress: false
-
   schedule:
     # 北京时间08:40 开盘完整全量分析
     - cron: '40 0 * * 1-5'
     # 北京时间14:10 收盘完整全量分析
     - cron: '10 6 * * 1-5'
+
+# 并发控制：同一时间只运行一个分析任务
+concurrency:
+  group: stock-analysis
+  cancel-in-progress: false
     
 jobs:
   analyze:
